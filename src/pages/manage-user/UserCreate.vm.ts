@@ -5,6 +5,7 @@ import useCreateApi from "../../hooks/use-create-api.ts";
 import ResourceUrl from "../../constants/ResourceUrl.ts";
 import moment from 'moment';
 import {UploadedImageResponse} from "../../models/Image.ts";
+import useUploadSingleImageApi from "../../hooks/use-upload-single-image-api.ts";
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
@@ -41,6 +42,8 @@ export default function useUserCreateViewModel() {
     const createApi = useCreateApi<UserRequest, UserResponse>
     (ResourceUrl.USER)
 
+    const uploadSingleImageApi =
+        useUploadSingleImageApi(`${ResourceUrl.USER}/upload-image`)
 
     const handleChangeAvatarFile: UploadProps['onChange'] =
         ({fileList: newFileList}) => {
@@ -66,7 +69,10 @@ export default function useUserCreateViewModel() {
         }
 
         if (avatarFile.length > 0) {
-            console.log('No Image')
+            uploadSingleImageApi.mutate(avatarFile[0].originFileObj as File, {
+                onSuccess: (uploadedImageResponse) => createUser(uploadedImageResponse),
+                onError: () => setLoading(false)
+            })
         } else {
             createUser()
         }

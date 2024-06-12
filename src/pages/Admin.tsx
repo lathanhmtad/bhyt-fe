@@ -2,9 +2,6 @@ import React, {useState} from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
 } from '@ant-design/icons';
 import {Button, Layout, Menu, theme} from 'antd';
 import {Outlet, useNavigate} from "react-router-dom";
@@ -29,20 +26,35 @@ const Admin: React.FC = () => {
                     defaultSelectedKeys={['1']}
                     items={[
                         {
-                            key: '1',
-                            icon: <UserOutlined/>,
+                            key: 'trang-chu',
+                            label: 'Trang chủ',
+                        },
+                        {
+                            key: 'quan-ly-nguoi-dung',
                             label: 'Quản lý người dùng',
                             onClick: () => navigate('/admin/quan-ly-nguoi-dung')
                         },
                         {
-                            key: '2',
-                            icon: <VideoCameraOutlined/>,
-                            label: 'nav 2',
+                            key: 'quan-ly-thong-bao',
+                            label: 'Quản lý thông báo',
+                            onClick: () => navigate('/admin/quan-ly-thong-bao')
                         },
                         {
-                            key: '3',
-                            icon: <UploadOutlined/>,
-                            label: 'nav 3',
+                            key: 'quan-ly-benh-dich',
+                            label: 'Quản lý bệnh dịch',
+                            onClick: () => navigate('/admin/quan-ly-benh-dich')
+                        },
+                        {
+                            key: 'khai-bao-y-te',
+                            label: 'Khai báo y tế',
+                        },
+                        {
+                            key: 'ho-so',
+                            label: 'Hồ sơ',
+                        },
+                        {
+                            key: 'dang-nhap',
+                            label: 'Đăng nhập',
                         },
                     ]}
                 />

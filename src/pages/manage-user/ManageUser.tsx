@@ -13,10 +13,12 @@ import './ManageUser.css'
 import UserDetailsTable from "../../components/UserDetailsTable.tsx";
 import {ListResponse} from "../../utils/FetchUtils.ts";
 import moment from 'moment';
+import defaultUser from '../../assets/img/defalt-user.png'
+import useDeleteByIdApi from "../../hooks/use-delete-by-id-api.ts";
 
 const ManageUser: React.FC = () => {
 
-    const {modal} = App.useApp();
+    const {modal, message} = App.useApp();
 
     const handleViewEntityButton = (record: UserResponse) => {
         modal.info(
@@ -30,7 +32,32 @@ const ManageUser: React.FC = () => {
                 width: '50%'
             }
         );
+    }
 
+    const deleteByIdApi = useDeleteByIdApi(ResourceUrl.USER, "users")
+
+    const handleDeleteEntityButton = (cccd: string) => {
+        modal.confirm(
+            {
+                title: 'Xác nhận xóa',
+                content: `Bạn chắc chắn muốn xóa người dùng có cccd là ${cccd}`,
+                onOk: () => {
+                    void message.open({
+                        key: 'deletable',
+                        type: 'loading',
+                        content: 'Đang xóa đối tượng có cccd là ' + cccd + '...',
+                        duration: 0
+                    });
+                    deleteByIdApi.mutate(cccd, {
+                        onSuccess: () => {
+                            message.destroy('deletable')
+                        },
+                        onError: () => message.destroy('deletable')
+                    });
+                },
+                maskClosable: true,
+            }
+        );
     }
 
     const columns: TableProps<UserResponse>['columns'] = [
@@ -40,9 +67,11 @@ const ManageUser: React.FC = () => {
             key: 'hovaten',
             render: (_, record) => <div className='d-flex align-items-center gap-3'>
                 <Image
-                    style={{borderRadius: '50%'}}
+                    style={{borderRadius: '50%', objectFit: 'cover'}}
                     width={40}
-                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                    height={40}
+                    src={record.anhdaidien ? record.anhdaidien :
+                        defaultUser}
                 />
                 <span>{record.hovaten}</span>
             </div>
@@ -90,7 +119,7 @@ const ManageUser: React.FC = () => {
                         className='d-flex align-items-center justify-content-center'
                         danger
                         type='primary'
-                        //onClick={() => handleDeleteEntityButton(record.id)}
+                        onClick={() => handleDeleteEntityButton(record.cccd)}
                     >
                         <MdOutlineDelete className='fs-5'/>
                     </Button>
@@ -108,6 +137,7 @@ const ManageUser: React.FC = () => {
     if (isLoading) return <div>Loading ...</div>
 
     return <div>
+        <h1>Quản lý người dùng</h1>
         <div className='d-flex justify-content-end mb-3'>
             <Link to='/admin/them-moi-nguoi-dung' className='btn btn-primary'>Thêm mới người dùng</Link>
         </div>

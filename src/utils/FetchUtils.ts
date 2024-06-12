@@ -1,4 +1,4 @@
-// import ApplicationConstants from '../constants/ApplicationConstants';
+import {UploadedImageResponse} from "../models/Image.ts";
 
 /**
  * RequestParams dùng để chứa các query param
@@ -198,7 +198,7 @@ class FetchUtils {
      * @param requestParams
      */
     static async getAll<O>(resourceUrl: string, requestParams?: RequestParams): Promise<ListResponse<O>> {
-        const response = await fetch(FetchUtils.concatParams(resourceUrl, { ...requestParams }));
+        const response = await fetch(FetchUtils.concatParams(resourceUrl, {...requestParams}));
         if (!response.ok) {
             throw await response.json();
         }
@@ -244,7 +244,7 @@ class FetchUtils {
      * @param entityId
      * @param requestBody
      */
-    static async update<I, O>(resourceUrl: string, entityId: number, requestBody: I): Promise<O> {
+    static async update<I, O>(resourceUrl: string, entityId: number | string, requestBody: I): Promise<O> {
         const response = await fetch(resourceUrl + '/' + entityId, {
             method: 'PUT',
             headers: {
@@ -265,7 +265,7 @@ class FetchUtils {
      * @param entityId
      */
     static async deleteById<T>(resourceUrl: string, entityId: T) {
-        const response = await fetch(resourceUrl + '/' + entityId, { method: 'DELETE' });
+        const response = await fetch(resourceUrl + '/' + entityId, {method: 'DELETE'});
         if (!response.ok) {
             throw await response.json();
         }
@@ -279,12 +279,28 @@ class FetchUtils {
     static async deleteByIds<T>(resourceUrl: string, entityIds: T[]) {
         const response = await fetch(resourceUrl, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(entityIds),
         });
         if (!response.ok) {
             throw await response.json();
         }
+    }
+
+
+    static async uploadSingleImage(resourceUrl: string, image: File): Promise<UploadedImageResponse> {
+        const formData = new FormData();
+        formData.append('image', image);
+
+        const response = await fetch(resourceUrl, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw await response.json();
+        }
+        return await response.json();
     }
 
     /**

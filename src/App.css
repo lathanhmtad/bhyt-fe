@@ -1,3 +1,4 @@
+/* Form Styles */
 .ant-form-item {
     margin-bottom: 12px;
 }
@@ -6,6 +7,19 @@
     padding-bottom: 0 !important;
 }
 
+.sign-up .ant-form-item-label-left {
+    margin-bottom: 12px;
+}
+
+.sign-up .ant-form-item-explain-error {
+    margin-bottom: 12px;
+}
+
+.form-image .ant-form-item-label {
+    text-align: center !important;
+}
+
+/* Upload Styles */
 .ant-upload-list-picture-card {
     justify-content: center;
 }
@@ -14,11 +28,60 @@
     width: 100% !important;
 }
 
-.form-image .ant-form-item-label {
-    text-align: center !important;
-}
-
 .ant-upload-list-item-container {
     width: 200px !important;
     height: 200px !important;
+}
+
+/* Page Wrapper Styles */
+.page-wrapper {
+    min-height: 100vh;
+}
+
+/* Background Gradient */
+.bg-gra-03 {
+    background: -webkit-gradient(linear, left bottom, right top, from(#08aeea), to(#b721ff));
+    background: -webkit-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
+    background: -moz-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
+    background: -o-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
+    background: linear-gradient(to top right, #08aeea 0%, #b721ff 100%);
+}
+
+/* Padding Utilities */
+.p-t-45 {
+    padding-top: 45px;
+}
+
+.p-b-50 {
+    padding-bottom: 50px;
+}
+
+/* Wrapper Styles */
+.wrapper {
+    margin: 0 auto;
+}
+
+.wrapper--w790 {
+    max-width: 790px;
+}
+
+/* Card Styles */
+.card-5 .card-heading {
+    padding: 20px 0;
+    background: #1a1a1a;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-5 .card-body {
+    padding: 52px 85px 73px;
+}
+
+/* Title Styles */
+.title {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
 }
