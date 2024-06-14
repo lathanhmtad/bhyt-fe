@@ -1,93 +1,63 @@
-import './KhaiBao.css'
+import { Form, Input, Radio, Select, Button, Upload, Space } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
+
 export default function KhaiBao() {
+    const [form] = Form.useForm();
+
+
     return (
         <div className="health-declaration">
-            <h2>Tờ khai y tế</h2>
-            <p>Trung thực khai báo những bệnh đã mắc phải trước khi vào thành phố.</p>
-            <form>
-                <div>
-                    <label className='flex-row'>
-                        <input
-                            type="radio"
-                            name="declarationType"
-                            value="Bệnh nhân"
-                        />
-                        Bệnh nhân
-                    </label>
-                    <label className='flex-row'>
-                        <input
-                            type="radio"
-                            name="declarationType"
-                            value="Khai hộ"
-                        />
-                        Khai hộ
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Căn cước công dân
-                        <input
-                            type="text"
-                            name="citizenID"
-                        />
-                    </label>
-                    <label>
-                        Số CCCD của người khai (nếu khai hộ)
-                        <input
-                            type="text"
-                            name="relativeID"
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Bệnh phổ biến
-                        <select
-                            name="commonDisease"
-                        >
-                            <option value="Sốt xuất huyết">Sốt xuất huyết</option>
-                            <option value="Nổi ban đỏ">Nổi ban đỏ</option>
-                        </select>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Hoặc bệnh khác
-                        <input
-                            type="text"
-                            name="otherDisease"
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Có triệu chứng
-                        <textarea
-                            name="symptoms"
-                        ></textarea>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Lịch trình
-                        <textarea
-                            name="travelHistory"
-                        ></textarea>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Tải lên minh chứng
-                        <input type="file" />
-                    </label>
-                </div>
-                <div className="buttons">
-                    <button type="button" onClick={() => console.log('Canceled')}>Hủy bỏ</button>
-                    <button type="submit">Lưu thông tin</button>
-                </div>
-            </form>
+            <h1 className='text-center'>Tờ khai y tế</h1>
+            <p className='mb-3 fs-6 text-center'>Trung thực khai báo những bệnh đã mắc phải trước khi vào thành phố.</p>
+            <Form form={form} size='large' layout="vertical">
+                <Form.Item name="declarationType" label="Loại khai báo" rules={[{ required: true, message: 'Vui lòng chọn loại khai báo!' }]}>
+                    <Radio.Group>
+                        <Radio value="Bệnh nhân">Bệnh nhân</Radio>
+                        <Radio value="Khai hộ">Khai hộ</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                
+                <Form.Item name="citizenID" label="Căn cước công dân" rules={[{ required: true, message: 'Vui lòng nhập căn cước công dân!' }]}>
+                    <Input />
+                </Form.Item>
+                
+                <Form.Item name="relativeID" label="Số CCCD của người khai (nếu khai hộ)">
+                    <Input />
+                </Form.Item>
+                
+                <Form.Item name="commonDisease" label="Bệnh phổ biến" rules={[{ required: true, message: 'Vui lòng chọn bệnh phổ biến!' }]}>
+                    <Select>
+                        <Select.Option value="Sốt xuất huyết">Sốt xuất huyết</Select.Option>
+                        <Select.Option value="Nổi ban đỏ">Nổi ban đỏ</Select.Option>
+                    </Select>
+                </Form.Item>
+                
+                <Form.Item name="otherDisease" label="Hoặc bệnh khác">
+                    <Input />
+                </Form.Item>
+                
+                <Form.Item name="symptoms" label="Có triệu chứng">
+                    <Input.TextArea />
+                </Form.Item>
+                
+                <Form.Item name="travelHistory" label="Lịch trình">
+                    <Input.TextArea />
+                </Form.Item>
+                
+                <Form.Item name="proof" label="Tải lên minh chứng">
+                    <Upload>
+                        <Button icon={<UploadOutlined />}>Tải lên</Button>
+                    </Upload>
+                </Form.Item>
+                
+                <Form.Item>
+                    <Space>
+                        <Button type="default" onClick={() => form.resetFields()}>Hủy bỏ</Button>
+                        <Button type="primary" htmlType="submit">Lưu thông tin</Button>
+                    </Space>
+                </Form.Item>
+            </Form>
         </div>
     );
 }
-
-
