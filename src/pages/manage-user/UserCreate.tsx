@@ -18,6 +18,7 @@ export default function UserCreate() {
         previewImage,
         setPreviewOpen,
         setPreviewImage,
+        resetForm
     } = useUserCreateViewModel()
 
     const onFinish: FormProps<UserRequest>['onFinish'] = (values) => {
@@ -187,7 +188,7 @@ export default function UserCreate() {
                             Gửi
                         </Button>
 
-                        <button className='btn btn-warning text-white'>Làm mới</button>
+                        <button type='button' onClick={resetForm} className='btn btn-warning text-white'>Làm mới</button>
                     </div>
                 </Form.Item>
             </Form>

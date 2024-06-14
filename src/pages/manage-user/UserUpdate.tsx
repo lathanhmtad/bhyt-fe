@@ -4,12 +4,13 @@ import {CiCirclePlus} from "react-icons/ci";
 
 import {UserRequest} from "../../models/User.ts";
 import useUserUpdateViewModel from "./UserUpdate.vm";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import moment from 'moment'
 
 export default function UserUpdate() {
 
     const {cccd} = useParams()
+
 
     const {
         loading,
@@ -204,7 +205,7 @@ export default function UserUpdate() {
                                 Gửi
                             </Button>
 
-                            <button className='btn btn-warning text-white'>Thoát</button>
+                            <Link to='/admin/quan-ly-nguoi-dung' className='btn btn-warning text-white'>Thoát</Link>
                         </div>
                     </Form.Item>
                 </Form>

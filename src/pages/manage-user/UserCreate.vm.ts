@@ -53,6 +53,11 @@ export default function useUserCreateViewModel() {
         }
 
 
+    const resetForm = () => {
+        form.resetFields()
+    }
+
+
     const handleSubmit = (values: UserRequest) => {
         setLoading(true)
         const createUser = (uploadedImageResponse?: UploadedImageResponse) => {
@@ -88,6 +93,7 @@ export default function useUserCreateViewModel() {
         avatarFile,
         handleOpenPreview,
         loading,
+        resetForm,
         handleSubmit
     }
 }

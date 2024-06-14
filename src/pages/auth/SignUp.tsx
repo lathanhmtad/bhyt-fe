@@ -2,6 +2,7 @@ import logoYte from '../../assets/img/logoYte.png'
 import {Button, Form, FormProps, Input, Radio} from "antd";
 import {UserRequest} from "../../models/User.ts";
 import useSignUpViewModel from "./SignUp.vm.ts";
+import {Link} from "react-router-dom";
 
 export default function SignUp() {
 
@@ -103,7 +104,7 @@ export default function SignUp() {
                                             Gửi
                                         </Button>
 
-                                        <button className='btn btn-warning text-white'>Trở lại</button>
+                                        <Link to='/login' className='btn btn-warning text-white'>Trở lại</Link>
                                     </div>
                                 </Form.Item>
                             </Form>

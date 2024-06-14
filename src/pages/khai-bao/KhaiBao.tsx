@@ -6,7 +6,7 @@ export default function KhaiBao() {
             <p>Trung thực khai báo những bệnh đã mắc phải trước khi vào thành phố.</p>
             <form>
                 <div>
-                    <label>
+                    <label className='flex-row'>
                         <input
                             type="radio"
                             name="declarationType"
@@ -14,7 +14,7 @@ export default function KhaiBao() {
                         />
                         Bệnh nhân
                     </label>
-                    <label>
+                    <label className='flex-row'>
                         <input
                             type="radio"
                             name="declarationType"
@@ -88,7 +88,6 @@ export default function KhaiBao() {
             </form>
         </div>
     );
-};
-
+}
 
 

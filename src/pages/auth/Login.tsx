@@ -2,8 +2,11 @@ import logoYte from '../../assets/img/logoYte.png'
 import {Button, Form, FormProps, Input} from "antd";
 import {UserRequest} from "../../models/User.ts";
 import useLoginViewModel from "./Login.vm.ts";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function Login() {
+
+    const navigate = useNavigate()
 
     const {
         form,
@@ -56,6 +59,10 @@ export default function Login() {
                                     <Input.Password/>
                                 </Form.Item>
 
+                                <div className='d-flex justify-content-end'>
+                                    <Link to='/sign-up'>Bạn chưa có tài khoản? Đăng ký</Link>
+                                </div>
+
                                 <Form.Item>
                                     <div className='d-flex justify-content-center gap-2 mt-3'>
                                         <Button
@@ -64,7 +71,7 @@ export default function Login() {
                                             Gửi
                                         </Button>
 
-                                        <button className='btn btn-warning text-white'>Trở lại</button>
+                                        <button onClick={() => navigate('/')} className='btn btn-warning text-white'>Trở lại</button>
                                     </div>
                                 </Form.Item>
                             </Form>

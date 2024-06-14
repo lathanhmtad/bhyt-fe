@@ -3,8 +3,9 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
 } from '@ant-design/icons';
-import {Button, Layout, Menu, theme} from 'antd';
+import {Button, Image, Layout, Menu, theme} from 'antd';
 import {Outlet, useNavigate} from "react-router-dom";
+import logo from '../assets/img/logoYte.png'
 
 const {Header, Sider, Content} = Layout;
 
@@ -28,6 +29,7 @@ const Admin: React.FC = () => {
                         {
                             key: 'trang-chu',
                             label: 'Trang chủ',
+                            onClick: () => navigate('/')
                         },
                         {
                             key: 'quan-ly-nguoi-dung',
@@ -47,20 +49,23 @@ const Admin: React.FC = () => {
                         {
                             key: 'khai-bao-y-te',
                             label: 'Khai báo y tế',
+                            onClick: () => navigate('/admin/khai-bao')
                         },
                         {
                             key: 'ho-so',
                             label: 'Hồ sơ',
+                            onClick: () => navigate('/admin/ho-so')
                         },
                         {
                             key: 'dang-nhap',
                             label: 'Đăng nhập',
+                            onClick: () => navigate('/login')
                         },
                     ]}
                 />
             </Sider>
             <Layout>
-                <Header style={{padding: 0, background: colorBgContainer}}>
+                <Header className='d-flex justify-content-between pe-4' style={{padding: 0, background: colorBgContainer}}>
                     <Button
                         type="text"
                         icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
@@ -71,6 +76,10 @@ const Admin: React.FC = () => {
                             height: 64,
                         }}
                     />
+
+                    <Image
+                        width={50}
+                        src={logo}/>
                 </Header>
                 <Content
                     style={{

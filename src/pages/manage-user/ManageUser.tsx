@@ -1,5 +1,5 @@
-import React from 'react';
-import {App, Button, Image, Space, Table} from 'antd';
+import React, { useState } from 'react';
+import {App, Button, Image, Pagination, Space, Table} from 'antd';
 import type {TableProps} from 'antd';
 import {UserResponse} from "../../models/User.ts";
 import {Link} from "react-router-dom";
@@ -19,6 +19,8 @@ import useDeleteByIdApi from "../../hooks/use-delete-by-id-api.ts";
 const ManageUser: React.FC = () => {
 
     const {modal, message} = App.useApp();
+
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     const handleViewEntityButton = (record: UserResponse) => {
         modal.info(
@@ -128,11 +130,15 @@ const ManageUser: React.FC = () => {
         },
     ];
 
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
     const {
         isLoading,
         data: listResponse = PageConfigs.initListResponse as ListResponse<UserResponse>
     } = useGetAllApi<UserResponse>
-    (ResourceUrl.USER, "users", {page: 1})
+    (ResourceUrl.USER, "users", {page: currentPage})
 
     if (isLoading) return <div>Loading ...</div>
 
@@ -141,7 +147,14 @@ const ManageUser: React.FC = () => {
         <div className='d-flex justify-content-end mb-3'>
             <Link to='/admin/them-moi-nguoi-dung' className='btn btn-primary'>Thêm mới người dùng</Link>
         </div>
-        <Table rowKey="cccd" columns={columns} dataSource={listResponse.content}/>
+        <Table rowKey="cccd" pagination={false} columns={columns}  dataSource={listResponse.content}/>
+        <Pagination
+                style={{ marginTop: '16px', textAlign: 'center' }}
+                current={currentPage}
+                total={listResponse.totalElements}
+                pageSize={listResponse.pageSize | 3}
+                onChange={handlePageChange}
+            />
     </div>
 }
 
