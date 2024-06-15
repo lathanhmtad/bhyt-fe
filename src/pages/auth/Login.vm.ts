@@ -26,6 +26,7 @@ export default function useLoginViewModel() {
             const userResponse = await loginApi.mutateAsync(values);
 
             if(userResponse.chucvu.machucvu === 3) navigate('/admin/quan-ly-nguoi-dung')
+            else navigate('/')
 
             NotifyUtils.simpleSuccess('Đăng nhập thành công');
         } catch (e) {
