@@ -1,3 +1,6 @@
-import KhaiBao from "./KhaiBao.tsx";
+import KhaiBao from "./KhaiBao";
+import KhaiBaoManage from "./KhaiBaoManage";
 
-export default KhaiBao
+export { KhaiBao };
+
+export default KhaiBaoManage;

@@ -1,4 +1,4 @@
-import { Form, Input, Radio, Select, Button, Upload, Space } from 'antd';
+import { Form, Input, Radio, Select, Button, Upload, Space, Row, Col } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
@@ -16,16 +16,20 @@ export default function KhaiBao() {
                         <Radio value="Bệnh nhân">Bệnh nhân</Radio>
                         <Radio value="Khai hộ">Khai hộ</Radio>
                     </Radio.Group>
-                </Form.Item>
-                
-                <Form.Item name="citizenID" label="Căn cước công dân" rules={[{ required: true, message: 'Vui lòng nhập căn cước công dân!' }]}>
-                    <Input />
-                </Form.Item>
-                
-                <Form.Item name="relativeID" label="Số CCCD của người khai (nếu khai hộ)">
-                    <Input />
-                </Form.Item>
-                
+                 </Form.Item>
+                <Row gutter={[24, 0]}>
+                        <Col span={12}>
+                            <Form.Item name="citizenID" label="Căn cước công dân" rules={[{ required: true, message: 'Vui lòng nhập căn cước công dân!' }]}>
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item name="relativeID" label="Số CCCD của người khai (nếu khai hộ)">
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
                 <Form.Item name="commonDisease" label="Bệnh phổ biến" rules={[{ required: true, message: 'Vui lòng chọn bệnh phổ biến!' }]}>
                     <Select>
                         <Select.Option value="Sốt xuất huyết">Sốt xuất huyết</Select.Option>
