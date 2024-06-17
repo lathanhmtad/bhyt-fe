@@ -54,7 +54,12 @@ export default function SignUp() {
                                 <Form.Item<UserRequest>
                                     label="Email"
                                     name="email"
-                                    rules={[{required: true, message: 'Vui lòng nhập email!'}]}
+                                    rules={
+                                        [
+                                            {required: true, message: 'Vui lòng nhập email!'},
+                                            {re}
+
+                                        ]}
                                 >
                                     <Input/>
                                 </Form.Item>
